@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="index.css">
+    <title>Tracker</title>
+</head>
+<body>
+    <div class="container">
+        <!-- TASK NAME -->
+        <div class="row taskName-padding">
+            <h1>Task Name</h1>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary add-style" type="button" id="button-addon2">Add</button>
+            </div>
+        </div>
+        <!-- TASK LIST -->
+        <div class="row taskList-padding">
+            <div class="row dropdown-padding">
+                <div class="col">
+                    <h1>Task List</h1>
+                </div>
+                <div class="col-5 dropdown-padding">
+                    <select class="form-select" aria-label="Default select example">
+                        <!-- <option selected>Open this select menu</option> -->
+                        <option value="1">Recently Added</option>
+                        <option value="2">Shortest Task</option>
+                      </select>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <!-- TASKS -->
+                    <div class="col text-style">
+                        <p class="p-margin">
+                            👽 List of Tasks Here 👽
+                        </p>
+                    </div>
+                    <!-- START AND END BUTTONS -->
+                    <div class="col-3">
+                        <div class="row">
+                            <button type="button" class="btn btn-secondary start-style">Start</button>
+                        </div>
+                        <div class="row button-padding">
+                            <button type="button" class="btn btn-secondary end-style">End</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SUMMARY -->
+        <div class="row summary-padding">
+                <h4>Summary: </h4>
+        </div>
+    </div>
+</body>
+</html>
