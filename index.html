@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Customized JQUERY -->
+    <script type="text/javascript" src="index.js"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- Customized CSS -->
@@ -15,7 +17,7 @@
     <div class="container">
         <!-- TASK NAME -->
         <div class="row taskName-padding">
-            <h1>Task Name</h1>
+            <h1>👽 Task Name 👽</h1>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="new-task-title">
                 <button class="btn btn-outline-secondary add-style" id="new-task" type="button">Add</button>
@@ -25,11 +27,10 @@
         <div class="row taskList-padding">
             <div class="row dropdown-padding">
                 <div class="col">
-                    <h1>Task List</h1>
+                    <h1>👽 Task List 👽</h1>
                 </div>
                 <div class="col-5 dropdown-padding">
                     <select class="form-select" id="filter">
-                        <option selected></option>
                         <option value="1">Recently Added</option>
                         <option value="2">Shortest Task</option>
                       </select>
@@ -44,39 +45,21 @@
                             <!-- TASK TEXT -->
                             <div class="col text-style">
                                 <p class="p-margin">
-                                    👽 Fix Start and End Timer 👽
+                                    Fix Start and End Timer
                                 </p>
                             </div>
                             <!-- START AND END BUTTONS -->
-                            <div class="col-3">
+                            <div class="col-5">
                                 <div class="row">
-                                    <button type="button" class="btn btn-secondary start-style">Start</button>
+                                    <span id="stopwatch"></span>
                                 </div>
-                                <div class="row button-padding">
-                                    <button type="button" class="btn btn-secondary end-style">End</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- TASK TEXT -->
-                            <div class="col text-style">
-                                <p class="p-margin">
-                                    👽 Filterning 👽
-                                </p>
-                            </div>
-                            <!-- START AND END BUTTONS -->
-                            <div class="col-3">
                                 <div class="row">
-                                    <button type="button" class="btn btn-secondary start-style">Start</button>
-                                </div>
-                                <div class="row button-padding">
-                                    <button type="button" class="btn btn-secondary end-style">End</button>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-secondary start-style" id="start">Start</button>
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn btn-secondary end-style" id="end">End</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,52 +67,10 @@
                 </div>
             </li>
         </ul>
-        
         <!-- SUMMARY -->
         <div class="row summary-padding">
             <h4>Summary: </h4>
         </div>
     </div>
 </body>
-
-<script>
-    $(document).ready(function(){
-        var taskDetails = []
-        var count = 0;
-        // Creating new task, added task appends to list
-        $("#new-task").click(function(){
-            var newTaskTitle = document.getElementById("new-task-title").value
-            if(newTaskTitle != ''){
-                console.log(newTaskTitle)
-                $("ul").prepend("<li><div class='card'><div class='card-body'><div class='row'><div class='col text-style'><p class='p-margin'>👽 " + newTaskTitle + " 👽</p></div><div class='col-3'><div class='row'><button type='button' class='btn btn-secondary start-style'>Start</button></div><div class='row button-padding'><button type='button' class='btn btn-secondary end-style'>End</button></div></div></div></div></div></li>"); 
-                document.getElementById('new-task-title').value = ''
-                taskDetails.push({key: count++, name: newTaskTitle, duration: null})
-                console.log(taskDetails)
-            } else {
-                alert("No Task!")
-            }
-        });
-
-        // Filtering 
-        $("#filter").change(function(){
-            // console.log("HELLO")
-            // console.log(taskDetails.sort((function(a, b){return b - a})))
-            var id = $(this).val();
-            var text = $('option:selected', this).text(); //to get selected text
-            console.log(id + "SAD" + text)
-
-            if(text == "Shortest Task"){
-                console.log(taskDetails.sort())
-            }
-
-            // 
-        });
-
-
-        
-        // $(document).on("click", "a.remove" , function() {
-        //     $(this).parent().remove();
-        // });
-    });
-</script>
 </html>

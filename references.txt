@@ -1,0 +1,6 @@
+Stopwatch Reference:
+http://jsfiddle.net/onigetoc/5v6twh2e/
+Filter Reference:
+https://stackoverflow.com/questions/7104024/jquery-sorting-an-array-of-objects 
+Append List Reference:
+https://www.tutorialrepublic.com/codelab.php?topic=faq&file=jquery-bind-click-event-to-dynamically-created-elements

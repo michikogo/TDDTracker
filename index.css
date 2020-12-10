@@ -40,8 +40,17 @@ li {
 }
 
 /* TASK LIST - START AND END BUTTON */
-.button-padding {
-  padding-top: 5px;
+.col-3 {
+  align-self: center;
+}
+.stopwatch-style {
+  font-size: xx-large;
+  padding-bottom: 5px;
+  text-align: center;
+}
+.start-style,
+.end-style {
+  width: 100%;
 }
 .start-style:hover {
   background-color: green;
