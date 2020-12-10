@@ -4,6 +4,7 @@ $(document).ready(function(){
         {id: 1, name: "Filterning", startTimeHours: null, startTimeMins: null, startTimeSeconds: null, endTimeHours: null, endTimeMins: null, endTimeSeconds: null, duration: null}
     ]
     var count = 2;
+    
     // Creatiing new task, added task appends to list
     $("#new-task").click(function(){
         var newTaskTitle = document.getElementById("new-task-title").value
@@ -55,7 +56,7 @@ $(document).ready(function(){
         var now = new Date(Date.now());
         var formatted = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
         console.log(formatted)
-        // $("#stopwatch").replaceWith("Start Time: " + formatted)
+        // $(this).closest('li').find("#stopwatch").replaceWith("Start Time: " + formatted)
         for(i = 0; i < taskDetails.length; i++) {
             if(taskName == taskDetails[i].name){
                 taskDetails[i].startTimeHours = now.getHours()
@@ -94,7 +95,7 @@ $(document).ready(function(){
                     console.log(computation)
 
                     taskDetails[i].duration = computation
-                    $("#stopwatch").replaceWith("( " + computation + " )")
+                    $(this).closest('li').find("#stopwatch").text("( " + computation + " )")
                 }
             }
         }
