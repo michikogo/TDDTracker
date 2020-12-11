@@ -56,6 +56,7 @@ $(document).ready(function(){
         var now = new Date(Date.now());
         var formatted = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
         console.log(formatted)
+
         // $(this).closest('li').find("#stopwatch").replaceWith("Start Time: " + formatted)
         for(i = 0; i < taskDetails.length; i++) {
             if(taskName == taskDetails[i].name){
@@ -79,7 +80,7 @@ $(document).ready(function(){
         var now = new Date(Date.now());
         var formatted = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
         console.log(formatted)
-
+        
         for(i = 0; i < taskDetails.length; i++) {
             if(taskDetails[i].startTimeHours != null){
                 if(taskName == taskDetails[i].name){
@@ -92,10 +93,29 @@ $(document).ready(function(){
                     var seconds = taskDetails[i].endTimeSeconds - taskDetails[i].startTimeSeconds
                 
                     var computation = hours + ":" + mins + ":" + seconds 
-                    console.log(computation)
+                    console.log("Computation:" + computation)
+                    console.log("Checking array Duration: " + taskDetails[i].duration)
 
-                    taskDetails[i].duration = computation
-                    $(this).closest('li').find("#stopwatch").text("( " + computation + " )")
+                    if(taskDetails[i].duration != null){
+                        splitDuration = taskDetails[i].duration.split(':')
+
+                        var totalHours = parseInt(splitDuration[0]) + hours
+                        var totalMins = parseInt(splitDuration[1]) + mins
+                        totalHours = totalHours + totalMins / 60;
+                        totalMins = mins % 60
+                        var totalSeconds = parseInt(splitDuration[2]) + seconds
+                        totalMins = totalMins + totalSeconds / 60
+                        totalSeconds = totalSeconds % 60
+
+                        var newDuration = parseInt(totalHours) + ":" + parseInt(totalMins) + ":" + parseInt(totalSeconds) 
+                        taskDetails[i].duration = newDuration
+                        console.log("New Duration: " + newDuration)
+                        $(this).closest('li').find("#stopwatch").text("( " + newDuration + " )")
+                    } else {
+                        taskDetails[i].duration = computation
+                        $(this).closest('li').find("#stopwatch").text("( " + computation + " )")
+                    }
+                    
                 }
             }
         }
