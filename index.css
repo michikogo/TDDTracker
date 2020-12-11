@@ -32,6 +32,12 @@ li {
   padding-right: 0px;
 }
 /* TASK LIST - CONTENT */
+.edit-style {
+  width: auto;
+  position: absolute;
+  right: 25px;
+  cursor: pointer;
+}
 .close-style {
   width: auto;
   position: absolute;
