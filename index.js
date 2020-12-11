@@ -1,11 +1,17 @@
 $(document).ready(function(){
     var taskDetails = [
-        {id: 0, name: "Fix Start and End Timer", startTimeHours: null, startTimeMins: null, startTimeSeconds: null, endTimeHours: null, endTimeMins: null, endTimeSeconds: null, duration: "00:00:00", durationInSeconds: null},
-        {id: 1, name: "Filterning", startTimeHours: null, startTimeMins: null, startTimeSeconds: null, endTimeHours: null, endTimeMins: null, endTimeSeconds: null, duration: "00:00:00", durationInSeconds: null}
+        {   id: 0, name: "Fix Start and End Timer", 
+            startTimeHours: null, startTimeMins: null, startTimeSeconds: null, 
+            endTimeHours: null, endTimeMins: null, endTimeSeconds: null, 
+            duration: "00:00:00", durationInSeconds: null
+        },
+        {   id: 1, name: "Filterning", 
+            startTimeHours: null, startTimeMins: null, startTimeSeconds: null, 
+            endTimeHours: null, endTimeMins: null, endTimeSeconds: null, 
+            duration: "00:00:00", durationInSeconds: null
+        }
     ]
     var count = 2;
-    
-    $("#end").attr("disabled", true);
 
     // Creatiing new task, added task appends to list
     $("#new-task").click(function(){
@@ -19,20 +25,26 @@ $(document).ready(function(){
                                 + '<button type="button" class="btn btn-secondary end-style" id="end">End</button></div></div></div></div></div></div></li>'
                             ); 
             document.getElementById('new-task-title').value = ''
-            taskDetails.push({id: count++, name: newTaskTitle, startTimeHours: null, startTimeMins: null, startTimeSeconds: null, endTimeHours: null, endTimeMins: null, endTimeSeconds: null, duration: "00:00:00", durationInSeconds: null})
+            taskDetails.push({
+                    id: count++, name: newTaskTitle, 
+                    startTimeHours: null, startTimeMins: null, startTimeSeconds: null, 
+                    endTimeHours: null, endTimeMins: null, endTimeSeconds: null, 
+                    duration: "00:00:00", durationInSeconds: null
+                })
             // console.log(taskDetails)
-            $("#end").attr("disabled", true);
-
         } else {
             alert("No Task!")
         }
     });
 
+    function notUsable(){
+        $(this).closest('li').find("#end").attr("disabled", true);
+    }
+
     // Filtering 
     $("#filter").change(function(){
         var id = $(this).val();
-        var text = $('option:selected', this).text(); //to get selected text
-        // console.log(id + "SAD" + text)
+        var text = $('option:selected', this).text();
         
         // Recently Added
         if(text == "Recently Added"){
@@ -46,32 +58,20 @@ $(document).ready(function(){
             taskDetails.sort(function(a, b){
                 return (a.timeInSeconds < b.timeInSeconds) ? 1 : -1;
             })
-
         }
-        // console.log($(this).closest('#content').find("#end"))
-        // $(this).closest('#content').find("#end").attr("disabled", false);
-        // $(this).closest('#content').find("#start").attr("disabled", true);
 
         // Printing Filtered
-        // console.log(taskDetails)
         $('ul').empty()
         for(i = 0; i<taskDetails.length; i++){
             durationSplit = taskDetails[i].duration.split(':')
-            // console.log(durationSplit)
             $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style"><span class="p-margin">' 
                             + taskDetails[i].name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
                             + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] 
                             + ')</span></div><div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
                             + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end">End</button>'
                             +'</div></div></div></div></div></div></li>'
-                        ); 
-            // $("#start").attr("disabled", false);
-            // $("#end").attr("disabled", true);
-            
-            $(this).closest('ul').find("#start").attr("disabled", false);
-            $(this).closest('ul').find("#end").attr("disabled", true);
+                        );
         }
-        
     });
 
     // Start Time
