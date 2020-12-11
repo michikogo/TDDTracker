@@ -13,6 +13,19 @@ $(document).ready(function(){
     ]
     var count = 2;
 
+    // Showing static objects in array
+    $.each(taskDetails, function(index, value){
+        console.log(taskDetails)
+        durationSplit = value.duration.split(':')
+        $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style"><span class="p-margin">' 
+                        + value.name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
+                        + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] + ')</span></div>'
+                        + '<div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
+                        + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end">End</button>'
+                        +'</div></div></div></div></div></div></li>'
+                    );
+    })
+
     // Creatiing new task, added task appends to list
     $("#new-task").click(function(){
         var newTaskTitle = document.getElementById("new-task-title").value
