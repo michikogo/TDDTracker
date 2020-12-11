@@ -66,8 +66,8 @@ $(document).ready(function(){
             durationSplit = taskDetails[i].duration.split(':')
             $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style"><span class="p-margin">' 
                             + taskDetails[i].name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
-                            + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] 
-                            + ')</span></div><div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
+                            + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] + ')</span></div>'
+                            + '<div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
                             + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end">End</button>'
                             +'</div></div></div></div></div></div></li>'
                         );
@@ -79,102 +79,79 @@ $(document).ready(function(){
         // console.log(this)
         // console.log($(this).closest('li').prop('id'));
         // console.log($(this).closest('li').find('.p-margin').text())
+        
         var taskName = $(this).closest('li').find('.p-margin').text()
         var now = new Date(Date.now());
-        var formatted = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        // console.log(formatted)
 
-        
-        
-        // $(this).closest('li').find("#stopwatch").replaceWith("Start Time: " + formatted)
         for(i = 0; i < taskDetails.length; i++) {
             if(taskName == taskDetails[i].name){
-                
+                // DISABLE start - ENABLE end
                 $(this).closest('li').find("#end").attr("disabled", false);
                 $(this).closest('li').find("#start").attr("disabled", true);
+                // Placing in array
                 taskDetails[i].startTimeHours = now.getHours()
                 taskDetails[i].startTimeMins = now.getMinutes()
                 taskDetails[i].startTimeSeconds = now.getSeconds()
             }
         }
-        // console.log(taskDetails)
-        // $(this).closest('li').toggleClass('strike').fadeOut('slow', function() { 
-            // stopwatchFormat.start();
-        // });
     });
-    
-    function computeDuration(){
-
-    }
 
     // End Stopwatch
     $(document).on('click', ' #end', function() {
-        // console.log(this)
-        // console.log($(this).closest('li').prop('id'));
-        console.log($(this).closest('li'));
-        // console.log($(this).closest('li').find('.p-margin').text())
-        var taskName = $(this).closest('li').find('.p-margin').text()
-        var now = new Date(Date.now());
-        var formatted = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        // console.log(formatted)
-
         var totalDurationHours = 0;
         var totalDurationMins = 0;
         var totalDurationSeconds = 0;
         var newTotalDuration = 0
+
+        var now = new Date(Date.now());
+        var taskName = $(this).closest('li').find('.p-margin').text()
+        
         for(i = 0; i < taskDetails.length; i++) {
             if(taskDetails[i].startTimeHours != null){
-                
-                
-        
                 if(taskName == taskDetails[i].name){
+                    // DISABLE end - ENABLE start
                     $(this).closest('li').find("#end").attr("disabled", true);
                     $(this).closest('li').find("#start").attr("disabled", false);
+                    // Placing in array
                     taskDetails[i].endTimeHours = now.getHours()
                     taskDetails[i].endTimeMins = now.getMinutes()
                     taskDetails[i].endTimeSeconds = now.getSeconds()
-
-                    var hours = taskDetails[i].endTimeHours - taskDetails[i].startTimeHours
-                    var mins = taskDetails[i].endTimeMins - taskDetails[i].startTimeMins
-                    var seconds = taskDetails[i].endTimeSeconds - taskDetails[i].startTimeSeconds
+                    // Compute difference of time
+                    var diffHours = taskDetails[i].endTimeHours - taskDetails[i].startTimeHours
+                    var diffMins = taskDetails[i].endTimeMins - taskDetails[i].startTimeMins
+                    var diffSeconds = taskDetails[i].endTimeSeconds - taskDetails[i].startTimeSeconds
+                    var computation = diffHours + ":" + diffMins + ":" + diffSeconds 
                 
-                    var computation = hours + ":" + mins + ":" + seconds 
-                    // console.log("Computation:" + computation)
-                    // console.log("Checking array Duration: " + taskDetails[i].duration)
-
                     if(taskDetails[i].duration != null){
-
-                        // computeDuration(taskDetails[i].duration, )
+                        // Computing duration
                         splitDuration = taskDetails[i].duration.split(':')
-
-                        var totalHours = parseInt(splitDuration[0]) + hours
-                        var totalMins = parseInt(splitDuration[1]) + mins
-                        totalHours = totalHours + totalMins / 60;
-                        totalMins = mins % 60
-                        var totalSeconds = parseInt(splitDuration[2]) + seconds
+                        var totalHours = parseInt(splitDuration[0]) + diffHours
+                        var totalMins = parseInt(splitDuration[1]) + diffMins
+                        totalHours = totalHours + totalMins / 60
+                        totalMins = diffMins % 60
+                        var totalSeconds = parseInt(splitDuration[2]) + diffSeconds
                         totalMins = totalMins + totalSeconds / 60
                         totalSeconds = totalSeconds % 60
-
+                        // Placing in array
                         var newDuration = parseInt(totalHours) + ":" + parseInt(totalMins) + ":" + parseInt(totalSeconds) 
                         taskDetails[i].duration = newDuration
-                        // console.log("New Duration: " + newDuration)
+                        console.log("First Time Duration: " + newDuration)
+                        // Showing in Website
                         $(this).closest('li').find("#stopwatch").text("( " + newDuration + " )")
 
-                        // Computing in seconds
+                        // Converting time into seconds for easier filtering
                         var hoursInSeconds = parseInt(totalHours) * 120
                         var minsInSeconds = parseInt(totalMins) * 60
                         var timeInSeconds = hoursInSeconds + minsInSeconds + parseInt(totalSeconds)
-
-                        // console.log(timeInSeconds)
-
+                        // Placing in array
                         taskDetails[i].durationInSeconds = timeInSeconds
-                        
                     } else {
-                        // Computing in seconds
-                        var hoursInSeconds = parseInt(hours) * 120
-                        var minsInSeconds = parseInt(mins) * 60
-                        var timeInSeconds = hoursInSeconds + minsInSeconds + parseInt(seconds)
+                        // Converting time into seconds for easier filtering
+                        var hoursInSeconds = parseInt(diffHours) * 120
+                        var minsInSeconds = parseInt(diffMins) * 60
+                        var timeInSeconds = hoursInSeconds + minsInSeconds + parseInt(diffSeconds)
 
+                        // Placing in array
                         taskDetails[i].duration = computation
                         taskDetails[i].durationInSeconds = timeInSeconds
                         // console.log(timeInSeconds)
@@ -183,6 +160,13 @@ $(document).ready(function(){
                     
                 }
             }
+
+
+
+
+
+
+
             // Computing total Time
             // console.log(i + "taskDetails[i].duration: " + taskDetails[i].durationInSeconds)
             totalDurationSplit = taskDetails[i].duration.split(':')
