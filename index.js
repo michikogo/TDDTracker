@@ -17,7 +17,7 @@ $(document).ready(function(){
     $("#new-task").click(function(){
         var newTaskTitle = document.getElementById("new-task-title").value
         if(newTaskTitle != ''){
-            // console.log(newTaskTitle)
+            console.log("[NEW TASK] newTaskTitle: " + newTaskTitle)
             $("ul").prepend('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style">'
                                 + '<span class="p-margin">' + newTaskTitle + '</span></div><div class="col-5"><div class="row">'
                                 + '<span class="stopwatch-style" id="stopwatch">(0:0:0)</span></div><div class="row"><div class="col">' 
@@ -31,7 +31,7 @@ $(document).ready(function(){
                     endTimeHours: null, endTimeMins: null, endTimeSeconds: null, 
                     duration: "00:00:00", durationInSeconds: null
                 })
-            // console.log(taskDetails)
+            console.log(taskDetails)
         } else {
             alert("No Task!")
         }
@@ -135,8 +135,8 @@ $(document).ready(function(){
                         // Placing in array
                         var newDuration = parseInt(totalHours) + ":" + parseInt(totalMins) + ":" + parseInt(totalSeconds) 
                         taskDetails[i].duration = newDuration
-                        console.log("First Time Duration: " + newDuration)
-                        // Showing in Website
+                        console.log("[END BTN] First Time Duration: " + newDuration)
+                        // Display
                         $(this).closest('li').find("#stopwatch").text("( " + newDuration + " )")
 
                         // Converting time into seconds for easier filtering
@@ -154,24 +154,15 @@ $(document).ready(function(){
                         // Placing in array
                         taskDetails[i].duration = computation
                         taskDetails[i].durationInSeconds = timeInSeconds
-                        // console.log(timeInSeconds)
+                        console.log("[END BTN] timeInSeconds: " + timeInSeconds)
+                        // Display
                         $(this).closest('li').find("#stopwatch").text("( " + computation + " )")
                     }
                     
                 }
             }
-
-
-
-
-
-
-
-            // Computing total Time
-            // console.log(i + "taskDetails[i].duration: " + taskDetails[i].durationInSeconds)
+            // Computing "Summary" Time 
             totalDurationSplit = taskDetails[i].duration.split(':')
-            // console.log(totalDurationSplit)
-
             totalDurationHours = totalDurationSplit[0] + totalDurationHours
             totalDurationMins = parseInt(totalDurationSplit[1]) + totalDurationMins
             totalDurationHours = totalDurationHours + totalDurationMins / 60;
@@ -179,13 +170,10 @@ $(document).ready(function(){
             totalDurationSeconds = parseInt(totalDurationSplit[2]) + totalDurationSeconds
             totalDurationMins = totalDurationMins + totalDurationSeconds / 60
             totalDurationSeconds = totalDurationSeconds % 60
-
             newTotalDuration = parseInt(totalDurationHours) + ":" + parseInt(totalDurationMins) + ":" + parseInt(totalDurationSeconds) 
-            
         }
-        console.log(newTotalDuration)
+        console.log("[SUMMARY] newTotalDuration:" + newTotalDuration)
         $("#total-time").empty()
-        
         $("#total-time").append("(" + newTotalDuration + ")")
         console.log(taskDetails)
     });
