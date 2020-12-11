@@ -32,6 +32,12 @@ li {
   padding-right: 0px;
 }
 /* TASK LIST - CONTENT */
+.close-style {
+  width: auto;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
 .text-style {
   align-self: center;
 }

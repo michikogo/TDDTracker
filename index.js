@@ -11,13 +11,18 @@ $(document).ready(function(){
             duration: "00:00:00", durationInSeconds: null
         }
     ]
+    // Index
     var count = 2;
 
     // Showing static objects in array
     $.each(taskDetails, function(index, value){
         console.log(taskDetails)
         durationSplit = value.duration.split(':')
-        $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style"><span class="p-margin">' 
+        $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row">'
+                        + '<div class="row"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square close-style" id="delete-task" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+                        + '<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>'
+                        + '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                        + '</svg></div><div class="col text-style"><span class="p-margin">' 
                         + value.name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
                         + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] + ')</span></div>'
                         + '<div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
@@ -31,9 +36,13 @@ $(document).ready(function(){
         var newTaskTitle = document.getElementById("new-task-title").value
         if(newTaskTitle != ''){
             console.log("[NEW TASK] newTaskTitle: " + newTaskTitle)
-            $("ul").prepend('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style">'
-                                + '<span class="p-margin">' + newTaskTitle + '</span></div><div class="col-5"><div class="row">'
-                                + '<span class="stopwatch-style" id="stopwatch">(0:0:0)</span></div><div class="row"><div class="col">' 
+            $("ul").prepend('<li id="task-card"><div class="card"><div class="card-body"><div class="row">'
+                                + '<div class="row"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square close-style" id="delete-task" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+                                + '<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>'
+                                + '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                                + '</svg></div><div class="col text-style"><span class="p-margin">' 
+                                +  newTaskTitle + '</span></div><div class="col-5"><div class="row">'
+                                + '<span class="stopwatch-style" id="stopwatch">(00:00:00)</span></div><div class="row"><div class="col">' 
                                 + '<button type="button" class="btn btn-secondary start-style" id="start">Start</button></div><div class="col">'
                                 + '<button type="button" class="btn btn-secondary end-style" id="end" disabled="disabled">End</button></div></div></div></div></div></div></li>'
                             ); 
@@ -73,8 +82,12 @@ $(document).ready(function(){
         $('ul').empty()
         for(i = 0; i<taskDetails.length; i++){
             durationSplit = taskDetails[i].duration.split(':')
-            $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row"><div class="col text-style"><span class="p-margin">' 
-                            + taskDetails[i].name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
+            $("ul").append('<li id="task-card"><div class="card"><div class="card-body"><div class="row">'
+                            + '<div class="row"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square close-style" id="delete-task" fill="currentColor" xmlns="http://www.w3.org/2000/svg">'
+                            + '<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>'
+                            + '<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>'
+                            + '</svg></div><div class="col text-style"><span class="p-margin">' 
+                            +  taskDetails[i].name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
                             + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] + ')</span></div>'
                             + '<div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
                             + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end" disabled="disabled">End</button>'
@@ -83,6 +96,40 @@ $(document).ready(function(){
         }
     });
 
+    // Deleting 
+    $(document).on('click', '#delete-task', function(){
+        var totalDurationHours = 0;
+        var totalDurationMins = 0;
+        var totalDurationSeconds = 0;
+        var newTotalDuration = 0
+
+        var taskName = $(this).closest("li").find('.p-margin').text()
+        console.log(taskName)
+
+        // Removed
+        $(this).closest('li').remove();
+        for(i = 0; i < taskDetails.length; i++) {
+            // Remove in Array
+            if(taskName == taskDetails[i].name){
+                taskDetails.splice(i,1)
+            }
+            // Computing New "Summary" Time 
+            totalDurationSplit = taskDetails[i].duration.split(':')
+            totalDurationHours = totalDurationSplit[0] + totalDurationHours
+            totalDurationMins = parseInt(totalDurationSplit[1]) + totalDurationMins
+            totalDurationHours = totalDurationHours + totalDurationMins / 60;
+            totalDurationMins = totalDurationMins % 60
+            totalDurationSeconds = parseInt(totalDurationSplit[2]) + totalDurationSeconds
+            totalDurationMins = totalDurationMins + totalDurationSeconds / 60
+            totalDurationSeconds = totalDurationSeconds % 60
+            newTotalDuration = parseInt(totalDurationHours) + ":" + parseInt(totalDurationMins) + ":" + parseInt(totalDurationSeconds)
+        }
+        console.log("[SUMMARY] newTotalDuration:" + newTotalDuration)
+        $("#total-time").empty()
+        $("#total-time").append("(" + newTotalDuration + ")")
+        console.log(taskDetails)
+    });
+    
     // Start Time
     $(document).on('click', ' #start', function() {
         // console.log(this)
