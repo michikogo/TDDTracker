@@ -21,7 +21,7 @@ $(document).ready(function(){
                         + value.name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
                         + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] + ')</span></div>'
                         + '<div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
-                        + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end">End</button>'
+                        + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end" disabled="disabled">End</button>'
                         +'</div></div></div></div></div></div></li>'
                     );
     })
@@ -35,7 +35,7 @@ $(document).ready(function(){
                                 + '<span class="p-margin">' + newTaskTitle + '</span></div><div class="col-5"><div class="row">'
                                 + '<span class="stopwatch-style" id="stopwatch">(0:0:0)</span></div><div class="row"><div class="col">' 
                                 + '<button type="button" class="btn btn-secondary start-style" id="start">Start</button></div><div class="col">'
-                                + '<button type="button" class="btn btn-secondary end-style" id="end">End</button></div></div></div></div></div></div></li>'
+                                + '<button type="button" class="btn btn-secondary end-style" id="end" disabled="disabled">End</button></div></div></div></div></div></div></li>'
                             ); 
             document.getElementById('new-task-title').value = ''
             taskDetails.push({
@@ -49,10 +49,6 @@ $(document).ready(function(){
             alert("No Task!")
         }
     });
-
-    function notUsable(){
-        $(this).closest('li').find("#end").attr("disabled", true);
-    }
 
     // Filtering 
     $("#filter").change(function(){
@@ -81,7 +77,7 @@ $(document).ready(function(){
                             + taskDetails[i].name + '</span></div><div class="col-5"><div class="row"><span class="stopwatch-style" id="stopwatch">(' 
                             + durationSplit[0] + ':' + durationSplit[1] + ':' + durationSplit[2] + ')</span></div>'
                             + '<div class="row"><div class="col"><button type="button" class="btn btn-secondary start-style" id="start">Start</button>'
-                            + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end">End</button>'
+                            + '</div><div class="col"><button type="button" class="btn btn-secondary end-style" id="end" disabled="disabled">End</button>'
                             +'</div></div></div></div></div></div></li>'
                         );
         }
