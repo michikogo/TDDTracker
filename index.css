@@ -52,7 +52,7 @@ li {
 }
 
 /* TASK LIST - START AND END BUTTON */
-.col-3 {
+.col-5 {
   align-self: center;
 }
 .stopwatch-style {
@@ -69,4 +69,9 @@ li {
 }
 .end-style {
   background-color: maroon;
+}
+
+.save-style {
+  margin-top: 5px;
+  margin-bottom: 0px !important;
 }
