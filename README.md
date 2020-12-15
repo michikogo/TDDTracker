@@ -1,6 +1,6 @@
 # TDDTracker
 
-Task tracking website that allows users to add tasks and log the time. This project was created with `HTML`, `CSS` and `jQuery`with the help of `Bootstrap`
+Task tracking website that allows users to add tasks and log the time. This project was created with `HTML`, `CSS` and `jQuery` with the help of `Bootstrap`
 
 *Note: The data will refresh once the page is refreshed.*
 
